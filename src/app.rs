@@ -15,7 +15,7 @@ pub async fn serve_blocking(listener: std::net::TcpListener) -> Result<(), crate
 
 #[cfg(test)]
 mod tests {
-    use hyper::{Body, Request, StatusCode};
+    use hyper::{Request, StatusCode};
     use tower::ServiceExt;
 
     use super::*;
@@ -23,7 +23,11 @@ mod tests {
     #[tokio::test]
     async fn test_healthcheck() {
         let response = make_app()
-            .oneshot(Request::get("/healthcheck").body(Body::empty()).unwrap())
+            .oneshot(
+                Request::get("/healthcheck")
+                    .body(Default::default())
+                    .unwrap(),
+            )
             .await
             .unwrap();
 
