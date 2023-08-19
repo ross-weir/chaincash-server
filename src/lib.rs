@@ -1,5 +1,5 @@
+pub mod app;
 pub mod error;
-pub mod server;
 
+pub use app::serve_blocking;
 pub use error::Error;
-pub use server::serve_blocking;
