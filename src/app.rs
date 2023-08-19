@@ -1,3 +1,5 @@
+//! ChainCash payment server creation and serving.
+
 use axum::{routing::get, Router};
 
 fn make_app() -> Router {
@@ -5,6 +7,18 @@ fn make_app() -> Router {
 }
 
 /// Serves the ChainCash payment server on the given listener forever.
+///
+/// # Example
+///
+/// ```
+/// # async fn run() {
+/// use std::net::TcpListener;
+///
+/// let listener = TcpListener::bind("127.0.0.1:3000").unwrap();
+///
+/// chaincash_server::serve_blocking(listener).await.unwrap();
+/// # }
+/// ```
 pub async fn serve_blocking(listener: std::net::TcpListener) -> Result<(), crate::Error> {
     axum::Server::from_tcp(listener)?
         .serve(make_app().into_make_service())
