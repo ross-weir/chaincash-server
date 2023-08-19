@@ -1,5 +1,4 @@
 //! ChainCash payment server creation and serving.
-
 use axum::{routing::get, Router};
 
 fn make_app() -> Router {

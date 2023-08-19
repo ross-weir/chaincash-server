@@ -1,3 +1,4 @@
+//! ChainCash server CLI.
 use clap::Parser;
 use tracing::info;
 
